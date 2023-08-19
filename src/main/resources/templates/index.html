@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Operations</title>
+</head>
+<body>
+<h1>File Operations</h1>
+
+<h2>Create File</h2>
+<form action="/create" method="post">
+    <label>Filename: <input type="text" name="filename"></label>
+    <input type="submit" value="Create">
+</form>
+
+<h2>Copy File</h2>
+<form action="/copy" method="post">
+    <label>Source: <input type="text" name="source"></label><br>
+    <label>Target: <input type="text" name="target"></label><br>
+    <input type="submit" value="Copy">
+</form>
+
+<h2>Compare Files</h2>
+<form action="/compare" method="get">
+    <label>File 1: <input type="text" name="file1"></label><br>
+    <label>File 2: <input type="text" name="file2"></label><br>
+    <input type="submit" value="Compare">
+</form>
+
+<h3 th:if="${isEqual}">Files are equal.</h3>
+<h3 th:unless="${isEqual}">Files are not equal.</h3>
+</body>
+</html>
