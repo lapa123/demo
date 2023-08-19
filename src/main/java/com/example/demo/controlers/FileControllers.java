@@ -19,33 +19,36 @@ import java.util.Arrays;
 public class FileControllers {
     private final FileServiceImpl fileServiceImpl;
 
-@Autowired
-public FileControllers(FileServiceImpl fileService){
-    this.fileServiceImpl = fileService;
-}
+    @Autowired
+    public FileControllers(FileServiceImpl fileService) {
+        this.fileServiceImpl = fileService;
+    }
+
     @PostMapping("/compareFiles")
-    public String compareFiles(@RequestParam ("fileName1") String file1 , @RequestParam ("fileName2") String file2){
-        Path path1 = Paths.get(file1);
-        Path path2 = Paths.get(file2);
-    fileServiceImpl.compareFiles("path1","path2");
-return "files are compared";
+    public String compareFiles(@RequestParam("fileName1") MultipartFile file1, @RequestParam("fileName2") MultipartFile file2) {
+        String fileOne = file1.getName();
+        String fileTwo = file2.getName();
+        Path path1 = Paths.get(fileOne);
+        Path path2 = Paths.get(fileTwo);
+        fileServiceImpl.compareFiles("path1", "path2");
+        return "files are compared";
 
     }
 
 
-
-
     @PostMapping("/create")
-    public String createFile(@RequestParam ("fileName") String filename)  {
-        Path path = Paths.get(filename);
-        fileServiceImpl.createFile("path");
+    public String createFile(@RequestParam("path") String path1, @RequestParam("content") String fileName) {
+
+        fileServiceImpl.createFile("path1");
         return "create";
     }
 
     @PostMapping("/copy")
-    public String copyFile(@RequestParam ("fileName1") String  file1 ,@RequestParam ("fileName2")String file2)  {
-        Path sourcePath = Paths.get(file1);
-        Path destinationPath = Paths.get(file2);
+    public String copyFile(@RequestParam ("fileName1") MultipartFile file1 ,@RequestParam("fileName2")MultipartFile file2)  {
+        String fileS = file1.getName();
+        String fileD = file2.getName();
+    Path sourcePath = Paths.get(fileS);
+        Path destinationPath = Paths.get(fileD);
         fileServiceImpl.copyFile("sourcePath","destinationPath");
 
         return "File is copied";

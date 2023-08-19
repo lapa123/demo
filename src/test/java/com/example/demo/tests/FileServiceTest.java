@@ -1,13 +1,21 @@
 package com.example.demo.tests;
 import com.example.demo.service.impl.FileServiceImpl;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.assertTrue;
-@RunWith(SpringRunner.class)
+import org.springframework.util.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Test.*;
+
 @SpringBootTest
 public class FileServiceTest {
     @Autowired
-   private FileServiceImpl fileServiceImpl;
+    private FileServiceImpl fileServiceImpl;
+
+    @Test
+    public void testCompareFiles() {
+       boolean result = fileServiceImpl.compareFiles("C:\\Users\\User\\IdeaProjects\\demo\\doc.txt", "C:\\Users\\User\\IdeaProjects\\demo\\fog.txt");
+        Assert.isTrue(result, "files are compared");
+    }
 }
